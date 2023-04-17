@@ -121,7 +121,7 @@ def get_contents(rating):
 #------------------------------------------------------------------------------
 st.title('Consultas de películas y series')
 
-image = Image.open("crs\Presentación1.png")
+image = Image.open("Presentación1.png")
 
 st.image(image, caption='PLataforma streaming')
 
