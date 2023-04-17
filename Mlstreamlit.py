@@ -58,7 +58,6 @@ def get_score_count(plataforma : str, scored : float, release_year: int):
 #3) Cantidad de películas por plataforma con filtro de PLATAFORMA. 
 # (La función debe llamarse get_count_platform(platform))
 #-------------------------------------------------------------------------------
-@app.get("/Cantidad de películas por plataforma - get_count_platform/{plataforma}")
 def get_count_platform(plataforma: str):
    
     # plataformas validas que se pueden elegir  
