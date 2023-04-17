@@ -121,9 +121,9 @@ def get_contents(rating):
 #------------------------------------------------------------------------------
 st.title('Consultas de películas y series')
 
-#image = Image.open("crs\Presentación1.png")
+image = Image.open("crs/Presentación1.png")
 
-#st.image(image, caption='PLataforma streaming')
+st.image(image, caption='PLataforma streaming')
 
 # Opciones de consulta
 options = ['Inicio','Duración máxima', 'Títulos por puntuación', 'Títulos por plataforma', 'Actor con más apariciones',"La cantidad de contenidos/productos","cantidad de contenido por rating","Modelo de recomendacion"]
