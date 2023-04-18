@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 import pandas as pd
+import numpy as np
 #from coneccion import consul
 from typing import Optional
 import uvicorn
