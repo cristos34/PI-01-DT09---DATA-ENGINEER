@@ -12,7 +12,7 @@ app=FastAPI(title="Api de consultas en Plataformas striming",
 
 consul=pd.read_csv("DataPlataformas.csv",sep=";")
 similarityMachinePeli = pd.read_csv('similarityMachinePeli.csv') 
-MachinePeli = pd.read_csv("MachinePeli.csv")
+MachinePeli = pd.read_csv('MachinePeli.csv')
 
 # introduccion
 @app.get("/docs")
