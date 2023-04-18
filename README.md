@@ -18,7 +18,7 @@
 <hr>  
 
 
-# <h2 align=center>**`Extarción, transformación y Carga (ETL)`**</h2>
+# <h2 align=center>**`Extración, transformación y Carga (ETL)`**</h2>
 
 
 
