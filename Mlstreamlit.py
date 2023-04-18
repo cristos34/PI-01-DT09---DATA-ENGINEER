@@ -19,6 +19,9 @@ consul=pd.read_csv("DataPlataformas.csv",sep=";")
 
 #cargo los datos del modelo de recomendacion
 recomendacion=pd.read_csv("Recomendacion.csv",sep=",",index_col=0)
+similarityMachinePeli = pd.read_csv('similarityMachinePeli.csv') 
+MachinePeli = pd.read_csv('MachinePeli.csv')
+
 # Definir las funciones para las consultas
 # Query 1: Duracion maxima
 #-------------------------------------------------------------------------------
@@ -257,19 +260,58 @@ def modelo_RecomendacionTitulo(movid:str):
         return a[a["movieId"]!=tituloDos].head(7)
 #---------------------------------------------------------------------------------------------------------
 # Consulta modelo de recomendacion
+def get_recommendation(title: str):
+    
+    arr = similarityMachinePeli.to_numpy()
+    try:
+        #Ubicamos el indice del titulo pasado como parametro en la columna 'title' del dts user_item
+        indice = np.where(MachinePeli['title'] == title)[0][0]
+        #Encontramos los indices de las puntuaciones y caracteristicas similares del titulo 
+        puntuaciones_similitud = arr[indice,:]
+        #Ordenamos los indices de menor a mayor
+        puntuacion_ordenada = np.argsort(puntuaciones_similitud)[::-1]
+        #seleccionamos solo 5 
+        top_indices = puntuacion_ordenada[:5]
+        #retornamos los 5 items con sus titulos como una lista
+        a=MachinePeli.loc[top_indices, 'title'].reset_index(drop=True)
+        return a
+        #Si el titulo dado no se encuentra damos un aviso
+    except IndexError:
+        print(f"El título '{title}' no se encuentra en la base de datos. Intente con otro título.")
+ 
+           
+def modelo_RecomendacionTitulo(movid:str):
+        reco=recomendacion.copy()
+        tituloDos=movid
+        categoria=list(reco["listed_in"][reco["title"]==tituloDos])
+        cat='|'.join(categoria)
+        a=reco[["movieId","title","listed_in","Prome_Raitings"]][(reco["listed_in"].str.contains(cat, case=False, na=True, regex=True)) &
+                                                    (reco["ratings"]>200) &
+                                                    (reco["Prome_Raitings"]>4)]
+        return a[a["movieId"]!=tituloDos].reset_index(drop=True).head(5)
+#---------------------------------------------------------------------------------------------------------
+# Consulta modelo de recomendacion con ML y sin ML
+#---------------------------------------------------------------------------------------------------------
 
 if query == 'Modelo de recomendacion':
     st.subheader('Peliculas y series recomendadas')
-    titul = st.selectbox("Escoja la pelicula por su nombre",options=recomendacion.apply(lambda  i: i["title"],axis=1))
+    title = st.selectbox("Escoja la pelicula por su nombre",options=recomendacion.apply(lambda  i: i["title"],axis=1))
+    #title = st.selectbox("Escoja la pelicula por su nombre",options=recomendacion.apply(lambda  i: i["title"],axis=1))
     #movid = st.selectbox("Escoja la pelicula su identificador",options=recomendacion.apply(lambda  i: i["movieId"],axis=1))
-   
+    
     if st.button('Consultar'):
-        
-           result = modelo_RecomendacionTitulo(titul)
-           st.subheader("A otros usuarios tambien les gustaron estas peliculas.")
+           
+           result = get_recommendation(title)
+           st.subheader("A otros usuarios tambien les gustaron estas peliculas con ML.")
+           st.write(result)
+           
+           result = modelo_RecomendacionTitulo(title)
+           st.subheader("A otros usuarios tambien les gustaron estas peliculas sin ML.")
            st.write(result) 
-            #st.write(f"Hay {result} títulos en {titul}.")      
-
+           st.write("")
+           st.write("Para cambiar de Streamlit a FastApi usa el siguiente enlace:")
+           st.write("https://fastapi-platafomas-streaming-09.onrender.com/docs")
+           st.write("BY Cristian Andres Contreras")  
 
 #para arrankar streamlit
 #streamlit run Mlstreamlit.py
