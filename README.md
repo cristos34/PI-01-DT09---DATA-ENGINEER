@@ -266,7 +266,7 @@ Una vez encendido ingresados al link ya podemos utilizar nuestras consultas en l
 * Una vez encendido ingresados al link, se pueden realizar las consultas en la APP de Streamlit, las cuales son las mismas del punto **2.6**
 
 **Video de presentación**
- **([https://drive.google.com/file/d/1QDk4qe1-GVL1jOaTSR7OPoSB2ERB6usp/view?usp=share_link](https://drive.google.com/file/d/1vZMK-M0V41zpkx1y0-gEn2aKHFe0mqE3/view?usp=sharing))**
+ **([https://drive.google.com/file/d/147f_XXR6PfH3XGqPWn8IVmpcdb-eNxGC/view?usp=sharing))**
 
 Fecha de inicio 10/04/2023  
 Fecha de finalización 19/04/2023
