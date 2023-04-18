@@ -262,7 +262,7 @@ Una vez encendido ingresados al link ya podemos utilizar nuestras consultas en l
 ## **2.9** **Paso a paso para ejecutar la App de Streamlit de forma remota con el deploy en Streamlit.io**
 
 * Paso a paso para ejecutar la APP, se tiene que ingresar al siguiente link que se conecta con el servidor:
- **[Streamlit_Recomienda](https://cristos34-pi-01-dt09---data-engineer-mlstreamlit-4nebr9.streamlit.app/)**  
+ **[Streamlit_Recomienda](https://cristos34-pi-01-dt09---data-engineer-mlstreamlit-8gqh60.streamlit.app/)**  
 * Una vez encendido ingresados al link, se pueden realizar las consultas en la APP de Streamlit, las cuales son las mismas del punto **2.6**
 
 **Video de presentación**
