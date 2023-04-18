@@ -11,6 +11,8 @@ app=FastAPI(title="Api de consultas en Plataformas striming",
 
 
 consul=pd.read_csv("DataPlataformas.csv",sep=";")
+similarityMachinePeli = pd.read_csv('similarityMachinePeli.csv') 
+MachinePeli = pd.read_csv("MachinePeli.csv")
 
 # introduccion
 @app.get("/docs")
@@ -140,6 +142,30 @@ def prod_per_county(tipo:str,pais:str,anio:int):
 @app.get("/La cantidad de contenidos/productos - get_contents(rating)")
 def get_contents(rating):
    return  f"El  rating  {rating} , tiene una cantidad de   {consul['id'][consul['rating']==rating].count()} peliculas"
+
+#------------------------------------------------------------------------------- 
+#7) Modelo de recomandacion. 
+#La función debe llamarse lamarse get_recommendation(title) 
+#------------------------------------------------------------------------------- 
+@app.get("/Modelo de recomendacion - get_recommendation(title)")
+def get_recommendation(title: str):
+    
+    arr = similarityMachinePeli.to_numpy()
+    try:
+        #Ubicamos el indice del titulo pasado como parametro en la columna 'title' del dts user_item
+        indice = np.where(MachinePeli['title'] == title)[0][0]
+        #Encontramos los indices de las puntuaciones y caracteristicas similares del titulo 
+        puntuaciones_similitud = arr[indice,:]
+        #Ordenamos los indices de menor a mayor
+        puntuacion_ordenada = np.argsort(puntuaciones_similitud)[::-1]
+        #seleccionamos solo 5 
+        top_indices = puntuacion_ordenada[:5]
+        #retornamos los 5 items con sus titulos como una lista
+        return MachinePeli.loc[top_indices, 'title'].tolist()
+        #Si el titulo dado no se encuentra damos un aviso
+    except IndexError:
+        print(f"El título '{title}' no se encuentra en la base de datos. Intente con otro título.")
+
             
 if __name__ == "__main__":
    uvicorn.run("main:app", host="0.0.0.0", port=8080)
