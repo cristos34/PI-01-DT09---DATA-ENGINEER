@@ -310,7 +310,7 @@ if query == 'Modelo de recomendacion':
            st.write(result) 
            st.write("")
            st.write("Para cambiar de Streamlit a FastApi usa el siguiente enlace:")
-           st.write("https://fastapi-platafomas-streaming-09.onrender.com/docs")
+           st.write("https://fastapi-platafomas-streaming-009.onrender.com/docs")
            st.write("BY Cristian Andres Contreras")  
 
 #para arrankar streamlit
